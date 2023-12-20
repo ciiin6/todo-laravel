@@ -13,7 +13,7 @@ add('writable_dirs', []);
 
 // Hosts
 
-host('172.16.42.64')
+host('192.168.18.13')
     ->set('remote_user', 'prod-ud4-deployer')
     ->set('identity_file', '~/.ssh/id_rsa')
     ->set('deploy_path', '/var/www/prod-ud4-a4/html');
@@ -34,3 +34,9 @@ before('deploy:symlink', 'artisan:migrate');
 // Hooks
 
 after('deploy:failed', 'deploy:unlock');
+
+task('reload:php-fpm', function () {
+    run('sudo /etc/init.d/php8.1-fpm restart');
+});
+# inclusió en el cicle de desplegament
+after('deploy', 'reload:php-fpm');
