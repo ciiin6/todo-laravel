@@ -13,7 +13,7 @@ add('writable_dirs', []);
 
 // Hosts
 
-host('192.168.18.13')
+host('172.16.43.168')
     ->set('remote_user', 'prod-ud4-deployer')
     ->set('identity_file', '~/.ssh/id_rsa')
     ->set('deploy_path', '/var/www/prod-ud4-a4/html');
@@ -40,3 +40,4 @@ task('reload:php-fpm', function () {
 });
 # inclusió en el cicle de desplegament
 after('deploy', 'reload:php-fpm');
+
